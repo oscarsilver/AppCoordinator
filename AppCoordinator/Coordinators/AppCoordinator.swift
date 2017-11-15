@@ -8,15 +8,18 @@
 
 import Foundation
 
-protocol Coordinator: class {
+protocol Coordinator: class, Equatable {
     func start()
 }
 
 protocol AppCoordinatorProtocol: Coordinator { }
 
-final class AppCoordinator: NSObject, AppCoordinatorProtocol {
+final class AppCoordinator: AppCoordinatorProtocol {
+    static func ==(lhs: AppCoordinator, rhs: AppCoordinator) -> Bool {
+        return true
+    }
 
-    var childCoordinators: [Coordinator] = []
+//    var childCoordinators: [Coordinator] = []
 
     var isAuthenticated: Bool = false
 
@@ -31,16 +34,16 @@ final class AppCoordinator: NSObject, AppCoordinatorProtocol {
 
 // MARK: AuthCoordinatorDelegate
 extension AppCoordinator: AuthCoordinatorDelegate {
-    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinatorProtocol) {
-        
+    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinator) {
+//        childCoordinators.
     }
 }
 
 // MARK: Private Methods
 private extension AppCoordinator {
     func showAuthentication() {
-        let authCoordinator =  AuthCoordinator()
-        childCoordinators.append(authCoordinator)
+        let authCoordinator = AuthCoordinator()
+//        childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
 

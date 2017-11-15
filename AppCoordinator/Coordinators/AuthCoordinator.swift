@@ -9,14 +9,18 @@
 import Foundation
 
 protocol AuthCoordinatorDelegate: class {
-    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinatorProtocol)
+    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinator)
 }
 
 protocol AuthCoordinatorProtocol: Coordinator {
     weak var delegate: AuthCoordinatorDelegate? { get }
 }
 
-final class AuthCoordinator: NSObject, AuthCoordinatorProtocol {
+final class AuthCoordinator: AuthCoordinatorProtocol {
+    static func ==(lhs: AuthCoordinator, rhs: AuthCoordinator) -> Bool {
+        return true
+    }
+
     weak var delegate: AuthCoordinatorDelegate?
 
     func start() {
