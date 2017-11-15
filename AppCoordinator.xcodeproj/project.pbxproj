@@ -12,6 +12,8 @@
 		FA6ABDA01FBC3B4F006AAA23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6ABD9E1FBC3B4F006AAA23 /* Main.storyboard */; };
 		FA6ABDA21FBC3B4F006AAA23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6ABDA11FBC3B4F006AAA23 /* Assets.xcassets */; };
 		FA6ABDA51FBC3B4F006AAA23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6ABDA31FBC3B4F006AAA23 /* LaunchScreen.storyboard */; };
+		FA6ABDB01FBC3FBB006AAA23 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */; };
+		FA6ABDB21FBC40EC006AAA23 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		FA6ABDA11FBC3B4F006AAA23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6ABDA41FBC3B4F006AAA23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6ABDA61FBC3B4F006AAA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		FA6ABD991FBC3B4F006AAA23 /* AppCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FA6ABDAC1FBC3F9F006AAA23 /* Coordinators */,
 				FA6ABD9A1FBC3B4F006AAA23 /* AppDelegate.swift */,
 				FA6ABD9C1FBC3B4F006AAA23 /* ViewController.swift */,
 				FA6ABD9E1FBC3B4F006AAA23 /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				FA6ABDA61FBC3B4F006AAA23 /* Info.plist */,
 			);
 			path = AppCoordinator;
+			sourceTree = "<group>";
+		};
+		FA6ABDAC1FBC3F9F006AAA23 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */,
+				FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +150,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6ABDB01FBC3FBB006AAA23 /* AppCoordinator.swift in Sources */,
 				FA6ABD9D1FBC3B4F006AAA23 /* ViewController.swift in Sources */,
+				FA6ABDB21FBC40EC006AAA23 /* AuthCoordinator.swift in Sources */,
 				FA6ABD9B1FBC3B4F006AAA23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +294,7 @@
 				DEVELOPMENT_TEAM = S7UD92PRSB;
 				INFOPLIST_FILE = AppCoordinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsilver.AppCoordinator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsilver.appcoordinator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -293,7 +309,7 @@
 				DEVELOPMENT_TEAM = S7UD92PRSB;
 				INFOPLIST_FILE = AppCoordinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsilver.AppCoordinator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsilver.appcoordinator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
