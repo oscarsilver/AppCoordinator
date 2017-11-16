@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import UIKit
+
+protocol AppCoordinatorDelegate: class {
+    func authCoordinatorDidAuthenticate(_ coordinator: AnyCoordinator)
+}
 
 protocol AppCoordinatorProtocol: Coordinator {}
 
@@ -15,6 +20,14 @@ final class AppCoordinator: AppCoordinatorProtocol {
     var childCoordinators: [AnyCoordinator] = []
     var isAuthenticated: Bool = false
 
+    private let rootViewController: UINavigationController
+
+    // MARK: Initialization
+    init(rootViewController: UINavigationController) {
+        self.rootViewController = rootViewController
+    }
+
+    // MARK: Coordinator
     func start() {
         if isAuthenticated {
             showMainScreen()
@@ -25,8 +38,8 @@ final class AppCoordinator: AppCoordinatorProtocol {
 }
 
 // MARK: AuthCoordinatorDelegate
-extension AppCoordinator: AuthCoordinatorDelegate {
-    func coordinatorDidAuthenticate(_ coordinator: AnyCoordinator) {
+extension AppCoordinator: AppCoordinatorDelegate {
+    func authCoordinatorDidAuthenticate(_ coordinator: AnyCoordinator) {
         childCoordinators.remove(coordinator)
         showMainScreen()
     }
@@ -35,12 +48,13 @@ extension AppCoordinator: AuthCoordinatorDelegate {
 // MARK: Private Methods
 private extension AppCoordinator {
     func showAuthentication() {
-        let authCoordinator = AnyCoordinator(AuthCoordinator())
+        let authCoordinator = AnyCoordinator(AuthCoordinator(rootViewController: rootViewController, delegate: self))
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
 
     func showMainScreen() {
-        print("showing main screen")
+        let mainViewController = MainViewController(nibName: nil, bundle: nil)
+        rootViewController.pushViewController(mainViewController, animated: false)
     }
 }

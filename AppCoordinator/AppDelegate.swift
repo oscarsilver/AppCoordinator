@@ -13,10 +13,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private lazy var appCoordinator: AppCoordinatorProtocol = AppCoordinator()
+    private lazy var rootViewController: UINavigationController = UINavigationController()
+    private lazy var appCoordinator: AppCoordinatorProtocol = AppCoordinator(rootViewController: self.rootViewController)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        appCoordinator.start()
+        showGUI()
         return true
+    }
+}
+
+// MARK: Private Methods
+private extension AppDelegate {
+    func showGUI() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .white
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
+        appCoordinator.start()
     }
 }
