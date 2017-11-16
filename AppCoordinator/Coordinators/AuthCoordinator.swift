@@ -18,6 +18,7 @@ protocol AuthCoordinatorProtocol: Coordinator {
 
 final class AuthCoordinator: AuthCoordinatorProtocol {
     weak var delegate: AuthCoordinatorDelegate?
+    var childCoordinators: [AnyCoordinator] = []
 
     func start() {
         print("Starting authentication flow")

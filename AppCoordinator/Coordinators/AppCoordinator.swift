@@ -9,16 +9,19 @@
 import Foundation
 
 protocol Coordinator {
+    var childCoordinators: [AnyCoordinator] { get set }
     var identifier: String { get }
     func start()
 }
 
 struct AnyCoordinator: Coordinator, Equatable {
     let identifier: String
+    var childCoordinators: [AnyCoordinator]
     private let _start: () -> ()
 
     init<U: Coordinator>(_ coordinator: U) {
         self.identifier = coordinator.identifier
+        self.childCoordinators = coordinator.childCoordinators
         self._start = coordinator.start
     }
 
@@ -42,7 +45,6 @@ protocol AppCoordinatorProtocol: Coordinator {}
 final class AppCoordinator: AppCoordinatorProtocol {
 
     var childCoordinators: [AnyCoordinator] = []
-
     var isAuthenticated: Bool = false
 
     func start() {
@@ -58,6 +60,7 @@ final class AppCoordinator: AppCoordinatorProtocol {
 extension AppCoordinator: AuthCoordinatorDelegate {
     func coordinatorDidAuthenticate(_ coordinator: AnyCoordinator) {
         childCoordinators.remove(coordinator)
+        showMainScreen()
     }
 }
 
@@ -70,7 +73,7 @@ private extension AppCoordinator {
     }
 
     func showMainScreen() {
-
+        print("showing main screen")
     }
 }
 
