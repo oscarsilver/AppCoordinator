@@ -14,6 +14,8 @@
 		FA6ABDA51FBC3B4F006AAA23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6ABDA31FBC3B4F006AAA23 /* LaunchScreen.storyboard */; };
 		FA6ABDB01FBC3FBB006AAA23 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */; };
 		FA6ABDB21FBC40EC006AAA23 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */; };
+		FABF00B21FBDD96800BA6B62 /* Array+RemoveEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF00B11FBDD96800BA6B62 /* Array+RemoveEquatable.swift */; };
+		FABF00B41FBDD9A800BA6B62 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF00B31FBDD9A800BA6B62 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		FA6ABDA61FBC3B4F006AAA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		FABF00B11FBDD96800BA6B62 /* Array+RemoveEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RemoveEquatable.swift"; sourceTree = "<group>"; };
+		FABF00B31FBDD9A800BA6B62 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		FA6ABD991FBC3B4F006AAA23 /* AppCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FABF00B01FBDD95500BA6B62 /* Extensions */,
 				FA6ABDAC1FBC3F9F006AAA23 /* Coordinators */,
 				FA6ABD9A1FBC3B4F006AAA23 /* AppDelegate.swift */,
 				FA6ABD9C1FBC3B4F006AAA23 /* ViewController.swift */,
@@ -74,8 +79,17 @@
 			children = (
 				FA6ABDAF1FBC3FBB006AAA23 /* AppCoordinator.swift */,
 				FA6ABDB11FBC40EC006AAA23 /* AuthCoordinator.swift */,
+				FABF00B31FBDD9A800BA6B62 /* Coordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		FABF00B01FBDD95500BA6B62 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FABF00B11FBDD96800BA6B62 /* Array+RemoveEquatable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABF00B21FBDD96800BA6B62 /* Array+RemoveEquatable.swift in Sources */,
 				FA6ABDB01FBC3FBB006AAA23 /* AppCoordinator.swift in Sources */,
+				FABF00B41FBDD9A800BA6B62 /* Coordinator.swift in Sources */,
 				FA6ABD9D1FBC3B4F006AAA23 /* ViewController.swift in Sources */,
 				FA6ABDB21FBC40EC006AAA23 /* AuthCoordinator.swift in Sources */,
 				FA6ABD9B1FBC3B4F006AAA23 /* AppDelegate.swift in Sources */,
