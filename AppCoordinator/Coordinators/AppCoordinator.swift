@@ -8,18 +8,40 @@
 
 import Foundation
 
-protocol Coordinator: class, Equatable {
+protocol Coordinator {
+    var identifier: String { get }
     func start()
 }
 
-protocol AppCoordinatorProtocol: Coordinator { }
+struct AnyCoordinator: Coordinator, Equatable {
+    let identifier: String
+    private let _start: () -> ()
 
-final class AppCoordinator: AppCoordinatorProtocol {
-    static func ==(lhs: AppCoordinator, rhs: AppCoordinator) -> Bool {
-        return true
+    init<U: Coordinator>(_ coordinator: U) {
+        self.identifier = coordinator.identifier
+        self._start = coordinator.start
     }
 
-//    var childCoordinators: [Coordinator] = []
+    func start() {
+        _start()
+    }
+
+    static func ==(lhs: AnyCoordinator, rhs: AnyCoordinator) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+}
+
+extension Coordinator {
+    var identifier: String {
+        return String(describing: self)
+    }
+}
+
+protocol AppCoordinatorProtocol: Coordinator {}
+
+final class AppCoordinator: AppCoordinatorProtocol {
+
+    var childCoordinators: [AnyCoordinator] = []
 
     var isAuthenticated: Bool = false
 
@@ -34,20 +56,26 @@ final class AppCoordinator: AppCoordinatorProtocol {
 
 // MARK: AuthCoordinatorDelegate
 extension AppCoordinator: AuthCoordinatorDelegate {
-    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinator) {
-//        childCoordinators.
+    func coordinatorDidAuthenticate(_ coordinator: AnyCoordinator) {
+        childCoordinators.remove(coordinator)
     }
 }
 
 // MARK: Private Methods
 private extension AppCoordinator {
     func showAuthentication() {
-        let authCoordinator = AuthCoordinator()
-//        childCoordinators.append(authCoordinator)
+        let authCoordinator = AnyCoordinator(AuthCoordinator())
+        childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
 
     func showMainScreen() {
 
+    }
+}
+
+extension Array where Element: Equatable {
+    mutating func remove(_ element: Element) {
+        self = self.filter { $0 == element }
     }
 }

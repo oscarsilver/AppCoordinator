@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AuthCoordinatorDelegate: class {
-    func coordinatorDidAuthenticate(_ coordinator: AuthCoordinator)
+    func coordinatorDidAuthenticate(_ coordinator: AnyCoordinator)
 }
 
 protocol AuthCoordinatorProtocol: Coordinator {
@@ -17,10 +17,6 @@ protocol AuthCoordinatorProtocol: Coordinator {
 }
 
 final class AuthCoordinator: AuthCoordinatorProtocol {
-    static func ==(lhs: AuthCoordinator, rhs: AuthCoordinator) -> Bool {
-        return true
-    }
-
     weak var delegate: AuthCoordinatorDelegate?
 
     func start() {
