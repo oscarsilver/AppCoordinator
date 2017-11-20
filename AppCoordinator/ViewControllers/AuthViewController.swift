@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias AuthenticationCallback = (UIViewController) -> Void
+
 class AuthViewController: UIViewController {
 
     private lazy var button: UIButton = {
@@ -20,7 +22,17 @@ class AuthViewController: UIViewController {
         return button
     }()
 
-    weak var delegate: AuthCoordinatorDelegate?
+    private let didAuthenticate: AuthenticationCallback
+
+    // MARK: Initialization
+    init(didAuthenticate: @escaping AuthenticationCallback) {
+        self.didAuthenticate = didAuthenticate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -33,7 +45,7 @@ class AuthViewController: UIViewController {
 // MARK: Selector Methods
 extension AuthViewController {
     @objc func didPressAuthenticateButton(_ sender: UIButton) {
-        delegate?.viewControllerDidAuthenticate(self)
+        didAuthenticate(self)
     }
 }
 

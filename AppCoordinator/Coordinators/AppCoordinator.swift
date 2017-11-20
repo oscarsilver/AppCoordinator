@@ -9,14 +9,9 @@
 import Foundation
 import UIKit
 
-protocol AppCoordinatorDelegate: class {
-    func authCoordinatorDidAuthenticate(_ coordinator: AnyCoordinator)
-}
-
 protocol AppCoordinatorProtocol: Coordinator {}
 
 final class AppCoordinator: AppCoordinatorProtocol {
-
     var childCoordinators: [AnyCoordinator] = []
     var isAuthenticated: Bool = false
 
@@ -38,7 +33,7 @@ final class AppCoordinator: AppCoordinatorProtocol {
 }
 
 // MARK: AuthCoordinatorDelegate
-extension AppCoordinator: AppCoordinatorDelegate {
+extension AppCoordinator {
     func authCoordinatorDidAuthenticate(_ coordinator: AnyCoordinator) {
         childCoordinators.remove(coordinator)
         showMainScreen()
@@ -48,7 +43,10 @@ extension AppCoordinator: AppCoordinatorDelegate {
 // MARK: Private Methods
 private extension AppCoordinator {
     func showAuthentication() {
-        let authCoordinator = AnyCoordinator(AuthCoordinator(rootViewController: rootViewController, delegate: self))
+        let authCoordinator = AnyCoordinator(AuthCoordinator(
+            rootViewController: rootViewController,
+            didAuthenticate: authCoordinatorDidAuthenticate
+            ))
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }

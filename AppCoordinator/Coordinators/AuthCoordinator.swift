@@ -9,37 +9,34 @@
 import Foundation
 import UIKit
 
-protocol AuthCoordinatorDelegate: class {
-    func viewControllerDidAuthenticate(_ viewController: UIViewController)
-}
+typealias AuthenticationCoordinatorCallback = (AnyCoordinator) -> Void
 
-protocol AuthCoordinatorProtocol: Coordinator {
-    weak var delegate: AppCoordinatorDelegate? { get }
-}
+protocol AuthCoordinatorProtocol: Coordinator { }
 
 final class AuthCoordinator: AuthCoordinatorProtocol {
 
     private let rootViewController: UIViewController
+    private let didAuthenticate: AuthenticationCoordinatorCallback
     var childCoordinators: [AnyCoordinator] = []
-    weak var delegate: AppCoordinatorDelegate?
 
-    init(rootViewController: UIViewController, delegate: AppCoordinatorDelegate? = nil) {
+    init(rootViewController: UIViewController,
+         didAuthenticate: @escaping AuthenticationCoordinatorCallback
+        ) {
         self.rootViewController = rootViewController
-        self.delegate = delegate
+        self.didAuthenticate = didAuthenticate
     }
 
     func start() {
-        let authController = AuthViewController(nibName: nil, bundle: nil)
-        authController.delegate = self
+        let authController = AuthViewController(didAuthenticate: viewControllerDidAuthenticate)
         rootViewController.present(authController, animated: true, completion: nil)
     }
 }
 
-// MARK: AuthCoordinatorDelegate
-extension AuthCoordinator: AuthCoordinatorDelegate {
+// MARK:
+extension AuthCoordinator {
     func viewControllerDidAuthenticate(_ viewController: UIViewController) {
         viewController.dismiss(animated: true) {
-            self.delegate?.authCoordinatorDidAuthenticate(AnyCoordinator(self))
+            self.didAuthenticate(AnyCoordinator(self))
         }
     }
 }

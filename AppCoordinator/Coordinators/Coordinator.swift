@@ -40,5 +40,3 @@ struct AnyCoordinator: Coordinator, Equatable {
         return lhs.identifier == rhs.identifier
     }
 }
-
-
