@@ -9,15 +9,14 @@
 import Foundation
 import UIKit
 
-typealias AuthenticationCoordinatorCallback = (AnyCoordinator) -> Void
+typealias AuthenticationCoordinatorCallback = (AuthCoordinator) -> Void
 
 protocol AuthCoordinatorProtocol: Coordinator { }
 
 final class AuthCoordinator: AuthCoordinatorProtocol {
-
     private let rootViewController: UIViewController
     private let didAuthenticate: AuthenticationCoordinatorCallback
-    var childCoordinators: [AnyCoordinator] = []
+    var childCoordinators: [Coordinator] = []
 
     init(rootViewController: UIViewController,
          didAuthenticate: @escaping AuthenticationCoordinatorCallback
@@ -32,11 +31,11 @@ final class AuthCoordinator: AuthCoordinatorProtocol {
     }
 }
 
-// MARK:
+// MARK: Authentication Callbacks
 extension AuthCoordinator {
     func viewControllerDidAuthenticate(_ viewController: UIViewController) {
         viewController.dismiss(animated: true) {
-            self.didAuthenticate(AnyCoordinator(self))
+            self.didAuthenticate(self)
         }
     }
 }

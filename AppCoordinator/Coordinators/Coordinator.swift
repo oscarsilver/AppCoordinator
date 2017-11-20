@@ -8,35 +8,15 @@
 
 import Foundation
 
-protocol Coordinator {
-    var childCoordinators: [AnyCoordinator] { get set }
-    var identifier: String { get }
+protocol Coordinator: class {
+    var childCoordinators: [Coordinator] { get set }
     func start()
 }
 
 extension Coordinator {
-    var identifier: String {
-        return String(describing: self)
-    }
-}
-
-// MARK: Coordinator Type Erasure
-struct AnyCoordinator: Coordinator, Equatable {
-    let identifier: String
-    var childCoordinators: [AnyCoordinator]
-    private let _start: () -> ()
-
-    init<U: Coordinator>(_ coordinator: U) {
-        self.identifier = coordinator.identifier
-        self.childCoordinators = coordinator.childCoordinators
-        self._start = coordinator.start
-    }
-
-    func start() {
-        _start()
-    }
-
-    static func ==(lhs: AnyCoordinator, rhs: AnyCoordinator) -> Bool {
-        return lhs.identifier == rhs.identifier
+    func remove(_ coordinator: Coordinator) {
+        if let index = childCoordinators.index(where: { $0 === coordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }
